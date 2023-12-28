@@ -17,7 +17,7 @@ class Gallery extends Model
 
     public function image() : Attribute              // mutators
     {
-        return Attribute::make(
+        return AttributeHash::make($value)(
             get: fn ($image) => $this->uploadDirectory. $image
         );
     }

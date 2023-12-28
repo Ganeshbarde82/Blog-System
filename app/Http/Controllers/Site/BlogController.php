@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class BlogController extends Controller
 {
     public function index(){
-         $blogs = Post::where('status',Post::PUBLISHED)->simplePaginate(10);                   //paginate(2)
+         $blogs = Post::where('status',Post::PUBLISHED)->Paginate(6);                   //paginate(2)
       // $blogs = Post::all();
         return view('site.index', compact('blogs'));
     }
@@ -20,7 +20,7 @@ class BlogController extends Controller
         if(! $blog){
             abort(404);
         }
-         $comments = Comment::where('post_id', $blog->id)->simplePaginate(4);
+         $comments = Comment::where('post_id', $blog->id)->Paginate(4);
        // $comments = Comment::where('post_id', $blog->id)->get();
        // $comments = Comment::all();
       // $latestPosts = Post::where('id', '!=', $blog->id)->latest()->limit(5)->get();

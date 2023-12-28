@@ -58,9 +58,10 @@
                         </select>
                       </div>
 
-                      <div class="form-group">
+                      <div class="form-group">      
                         <label>Category</label>
-                        <select name="category" class="form-control"  placeholder="description">
+                        {{-- category_id not  use in name    --}}
+                   <select name="category" class="form-control"  placeholder="description">
                             <option value="" disabled selected> Choose Option</option>
                           @if (count($categories) > 0)
                           @foreach ($categories as $category)
@@ -75,6 +76,7 @@
 
                       <div class="form-group">
                         <label>Tags</label>
+                          {{-- multiple tag enable [ ] --}}
                         <select name="tags[]" class="form-control selectpicker" multiple data-live-search="true"  >
                         {{-- <select name="tags" class="form-control selectpicker" multiple data-live-search="true" > --}}
                             <option value="" disabled selected> Choose Option</option>

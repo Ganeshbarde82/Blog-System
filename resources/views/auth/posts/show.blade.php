@@ -13,6 +13,7 @@
 
 @section('content')
 
+
       
 <div class="content-wrapper">
 	<div class="content">
@@ -23,8 +24,6 @@
 				{{-- <a class="btn mdi mdi-code-tags" data-toggle="collapse" href="#collapse-input-musk" role="button" aria-expanded="false" aria-controls="collapse-input-musk"> </a> --}}
 			</div>
     
-     
-      
 			<div class="card-body"> 
 
                 @if ($post)
@@ -49,16 +48,12 @@
                 <tr>
                         <th scope="col">Status</th>
                         <td>{{ $post->status ==1 ? 'Published': 'Draft' }}</td>
-                        
-
                       </tr>
                     </tbody>
                   </table>
                   @else 
                   <h3 class="text-center text-danger">  No Post Found</h3>
-                  @endif
-       
-          
+                  @endif  
      </div>
 	</div>
 	</div> 

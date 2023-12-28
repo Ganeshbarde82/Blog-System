@@ -58,7 +58,7 @@ class PostController extends Controller
 
         try {
 
-      //  DB::transaction(function() use ($request)   // 1st clouser
+      //  DB::transaction(function() use ($request)   // 1st clouser  using fasade
       //  {                                            // 1st clouser
             DB::beginTransaction(); 
             if ($file = $request->file('file')){
@@ -78,12 +78,12 @@ class PostController extends Controller
                 'category_id' => $request->category,
     
             ]);
-    
+                                                        // multiple tags  post model
             foreach($request->tags as $tag) {
                 $post->tags()->attach($tag);
-            }
+            }                                          // seesion two type 1) put simple   2)flash  benfiet  only onece throw automatic expire
             DB::commit();
-            $request->session()->flash('alert-success', 'Post Created Successfully');
+            $request->session()->flash('alert-success', 'Post Created Successfully');     // ('key' ,'value')
             return to_route('posts.index');
        // });                                           // 1st clouser
         } 
@@ -178,6 +178,7 @@ class PostController extends Controller
         $post ->delete();
         request()->session()->flash('alert-success', 'Post Deleted Successfully');
         return to_route('posts.index');
+        
     }
 
     private function uploadFile($file){

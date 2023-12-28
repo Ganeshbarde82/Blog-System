@@ -61,8 +61,8 @@
                  @endif
 
           </div>
-  
-          <div class="row justify-content-center ">
+{{--   
+          <div class="row"> --}}
             {{ $blogs->render() }}
 
                {{-- <div class="col-lg-6 text-center">
@@ -75,7 +75,7 @@
                       </div>
                   </nav>
               </div>  --}}
-          </div>
+          {{-- </div> --}}
       </div>
   </section>
 

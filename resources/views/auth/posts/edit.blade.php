@@ -61,10 +61,11 @@
                         </select>
                       </div>
 
-                      <div class="form-group">
+                       {{-- <div class="form-group">
                         <label>Category</label>
                         <select name="category" class="form-control"  placeholder="description">
                             <option value="" disabled selected> Choose Option</option>
+                            <option value="" disabled selected></option>
                           @if (count($categories) > 0)
                           @foreach ($categories as $category)
                           <option @selected(old('category', $post->category) == $category->id) value="{{ $category->id }}">{{ $category->name }}</option>
@@ -73,7 +74,21 @@
                           @endif
 
                         </select>
+                      </div>  --}}
+
+
+
+                      <div class="form-group">
+                        <label for="category">Category</label>
+                        <select name="category" class="form-control" id="category" placeholder="description">
+                            @if (count($categories) > 0)
+                                @foreach ($categories as $category)
+                                    <option {{ $post->category->id == $category->id ? 'selected' : '' }} value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            @endif
+                        </select>
                       </div>
+                      
 
 
                       {{-- <div class="form-group">
@@ -97,11 +112,10 @@
 
                         </select>
                       </div> --}}
-
+{{-- 
                       <div class="form-group">
                         <label>Tags</label>
                         <select name="tags[]" class="form-control selectpicker" multiple data-live-search="true"  >
-                        {{-- <select name="tags" class="form-control selectpicker" multiple data-live-search="true" > --}}
                             <option value="" disabled selected> Choose Option</option>
                           @if (count($tags) > 0)
                           @foreach ($tags as $tag)
@@ -109,17 +123,58 @@
                           
                           @endforeach
                           @endif
-
-                         
-                          
                         </select>
-                      </div>
-                    
+                      </div> --}}
+
                       <div class="form-group">
+                        <label>Tags1</label>
+                        <select name="tags[]" class="form-control selectpicker" multiple data-live-search="true">
+                            {{-- <option value="" disabled selected>Choose Option</option> --}}
+                            @if (count($tags) > 0)
+                                @foreach ($tags as $tag)
+                                    <option value="{{ $tag->id }}" {{ in_array($tag->id, $post->tags->pluck('id')->toArray()) ? 'selected' : '' }}>
+                                        {{ $tag->name }}
+                                    </option>
+                                @endforeach
+                            @endif
+                        </select>
+                    </div>
+
+
+
+                      {{-- <select name="tags[]" class="form-control selectpicker" multiple data-live-search="true">
+                        <!-- ... your other options ... -->
+                        @foreach ($tags as $tag)
+                            <option value="{{ $tag->id }}" {{ in_array($tag->id, $tagIds) ? 'selected' : '' }}>
+                                {{ $tag->name }}
+                            </option>
+                        @endforeach
+                    </select> --}}
+
+
+                    
+                      {{-- <div class="form-group">
                         <label >Images</label>
                         <input type="file" name="file" value="{{ old('file') }}" class="form-control"  >
                        
-                      </div>
+                      </div> --}}
+
+                      <div class="form-group">
+                        <label>Images</label>
+                        @if ($post->gallery && $post->gallery->image)
+                            <p>Previous Image:</p>
+                            <img src="{{ asset('storage/auth/posts/' . $post->gallery->image) }}" alt="Previous Image">
+                        @endif
+                        <input type="file" name="file" class="form-control">
+                    </div>
+
+                    {{-- <div class="form-group">
+                      <label>Images</label>
+                      @if ($post->gallery && $post->gallery->image)
+                          <p>Previous Image: {{ $post->gallery->image }}</p>
+                      @endif
+                      <input type="file" name="file" class="form-control">
+                  </div> --}}
                     
                     <button type="submit" class="btn btn-primary">Submit</button>
                   </form>
@@ -127,6 +182,7 @@
 		</div>
 	</div> 
     @endsection
+    
 
     
 @section('scripts')

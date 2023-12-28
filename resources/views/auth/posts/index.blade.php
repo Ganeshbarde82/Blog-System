@@ -8,6 +8,19 @@
 
 <link href="{{ asset("assets/auth/plugins/DataTables/DataTables-1.10.18/css/jquery.dataTables.min.css") }}" rel="stylesheet" />
 
+<style>
+
+#outer {
+  text-align: center;
+  
+}
+.inner {
+  display: inline-block;
+}
+
+</style>
+
+
 @endsection
 
 
@@ -19,7 +32,7 @@
 		<!-- Masked Input -->
 		<div class="card card-default">
 			<div class="card-header">
-				<h2>Create Post</h2>
+				<h2>All Post</h2>
 				{{-- <a class="btn mdi mdi-code-tags" data-toggle="collapse" href="#collapse-input-musk" role="button" aria-expanded="false" aria-controls="collapse-input-musk"> </a> --}}
 			</div>
       @if (Session::has('alert-success'))
@@ -42,7 +55,7 @@
                         <th scope="col">Category</th>
                         <th scope="col">Username</th>
                         <th scope="col">Status</th>
-                        <th scope="col">Action</th>
+                        <th class="text-center" scope="col">Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -54,15 +67,16 @@
                         <td>{{ $post->category->name }}</td>
                         <td>{{ $post->user->name }}</td>
                         <td>{{ $post->status == 1 ? 'Active': 'inactive' }}</td>
-                        <td>
-                          <a href="{{ route('posts.show', $post->id) }}" class="btn btn-sm btn-success"><i class="fas fa-eye"></i> </a>
-                          <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-sm btn-info"><i class="fas fa-edit"></i></a>
+                        <td id="outer">
+                          <a href="{{ route('posts.show', $post->id) }}" class="btn btn-sm btn-success inner"><i class="fas fa-eye"></i> </a>
+                          <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-sm btn-info inner"><i class="fas fa-edit"></i></a>
                           {{-- <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-sm btn-info"><i class="fas fa-edit"></i></a> --}}
-                          <form method="post" action="{{ route('posts.destroy',$post->id) }}">
+                          <form method="post" class="inner" action="{{ route('posts.destroy',$post->id) }}">
                             @method('DELETE')
                             @csrf
                             <button type="submit"> <a  class="btn btn-sm btn-danger mt-1"><i class="fas fa-trash"></i></a></button>
                           </form>
+                          
                           
                         </td>
                       </tr>
