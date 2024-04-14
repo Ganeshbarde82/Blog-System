@@ -154,10 +154,11 @@ class PostController extends Controller
                 'status' => $request->status,
                 'category_id' => $request->category,
         ]);
-            }else
-            {
-                dd('no');
             }
+            // else
+            // {
+            //     dd('no');
+            // }
         }
        
         foreach($request->tags as $tag)  {
